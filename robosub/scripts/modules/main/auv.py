@@ -12,19 +12,26 @@ import modules.main.status as status
 
 from houston import Houston
 
-
+"""
+Setup for houston and other mods, config file is not properly being loaded.
+holds all instances of houston and other classes used in the cli.
+GUI should be attached to this.
+"""
 class AUV():
     """AUV Master, automates tasks"""
 
     def __init__(self):
         rospy.init_node('AUV', anonymous=True)  # initialize AUV rosnode
 
-        rospy.Subscriber('kill_switch', Int8, self.kill_switch_callback)  # Subscriber for magnet kill switch
+        #listening to nothing... don't need currently
+        #rospy.Subscriber('kill_switch', Int8, self.kill_switch_callback)  # Subscriber for magnet kill switch
 
         self.motor_state = None
         self.tasks = None
 
         # self.config = Config()  # initialize Config() class
+        # doesn't store everything that's needed. incomplete.
+        
         self.read_config()  # read parameters from the config.ini file
 
         self.motor = Motor(self.motor_state)  # initialize Motor() class
